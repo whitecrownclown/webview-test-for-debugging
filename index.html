@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <style>
+            #container
+            {
+                display: grid;
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+        <script>
+
+            const contextMenu = require('electron-context-menu')
+
+            window.onload = function()
+            {
+                wv1 = document.querySelector('.webview_1')
+
+                let replacement = document.createElement('webview')
+                replacement.classList.add('webview')
+                replacement.classList.add('webview_1')
+                
+                replacement.addEventListener('found-in-page', function(e)
+                {
+                    console.log(e)
+                })
+                
+                replacement.src = 'https://en.wikipedia.org/wiki/Electron_(software_framework)'
+
+                let parent = document.querySelector('#container')
+                parent.replaceChild(replacement, wv1)
+
+                new_webview = document.querySelector('.webview_1')
+
+                contextMenu(
+                {
+                    window: new_webview,
+                    showCopyImageAddress: true,
+                    showSaveImageAs: true,
+                    showInspectElement: true
+                })
+            
+                // Open the console and use:
+                // wv1.findInPage('electron')
+            }
+        </script>
+    </head>
+    <body>
+        <div id='container'>
+            <webview class='webview webview_1' src='https://en.wikipedia.org/wiki/Electron' webpreferences='allowRunningInsecureContent' allowpopups></webview>
+            <webview class='webview webview_2' src='https://en.wikipedia.org/wiki/Electron' webpreferences='allowRunningInsecureContent' allowpopups></webview>
+        </div>
+    </body>
+</html>

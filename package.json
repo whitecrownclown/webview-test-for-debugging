@@ -1,0 +1,16 @@
+{
+  "name": "Webview-findInPage-Test",
+  "productName": "Webview-indInPage-Test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "electron-context-menu": "~0.12.1"
+  },
+  "devDependencies": {
+    "electron": "~5.0.2",
+    "electron-packager": "~13.1.1"
+  },
+  "scripts": {
+    "start": "electron ."
+  }
+}
