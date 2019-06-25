@@ -14,41 +14,39 @@
 
             window.onload = function()
             {
+
+
                 wv1 = document.querySelector('.webview_1')
 
-                let replacement = document.createElement('webview')
-                replacement.classList.add('webview')
-                replacement.classList.add('webview_1')
-                
-                replacement.addEventListener('found-in-page', function(e)
-                {
-                    console.log(e)
-                })
-                
-                replacement.src = 'https://en.wikipedia.org/wiki/Electron_(software_framework)'
+                wv1.addEventListener('dom-ready', () => {
 
-                let parent = document.querySelector('#container')
-                parent.replaceChild(replacement, wv1)
+                    contextMenu(
+                    {
+                        window: wv1,
+                        showCopyImageAddress: true,
+                        showSaveImageAs: true,
+                        showInspectElement: true
+                    })
 
-                new_webview = document.querySelector('.webview_1')
+                    // Open the console and use:
+                    // wv1.findInPage('electron')
 
-                contextMenu(
-                {
-                    window: new_webview,
-                    showCopyImageAddress: true,
-                    showSaveImageAs: true,
-                    showInspectElement: true
-                })
-            
-                // Open the console and use:
-                // wv1.findInPage('electron')
+                    wv1.addEventListener('found-in-page', (e) => {
+                        console.log(e);
+                    })
+
+                    wv1.findInPage('electron');
+
+
+                });
+
+
             }
         </script>
     </head>
     <body>
         <div id='container'>
             <webview class='webview webview_1' src='https://en.wikipedia.org/wiki/Electron' webpreferences='allowRunningInsecureContent' allowpopups></webview>
-            <webview class='webview webview_2' src='https://en.wikipedia.org/wiki/Electron' webpreferences='allowRunningInsecureContent' allowpopups></webview>
         </div>
     </body>
 </html>
